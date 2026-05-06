@@ -89,13 +89,11 @@ public class UserService implements IUserService {
             String cacheKey = String.format("userStatus_%d", userId);
             Cache cache = cacheManager.getCache("userStatus");
 
-            // 1) gyors cache check
             UserCurrentStatus userCurrentStatus = cacheService.getCachedData(cache, cacheKey, LOG_PREFIX, UserCurrentStatus.class);
             if (userCurrentStatus != null) {
                 return CompletableFuture.completedFuture(userCurrentStatus);
             }
 
-            // 2) per-key lokális lock
             ReentrantLock lock = locks.computeIfAbsent(cacheKey, k -> new ReentrantLock());
             boolean locked = false;
             try {
@@ -129,8 +127,6 @@ public class UserService implements IUserService {
                 if (locked) {
                     lock.unlock();
                 }
-                // cleanup: csak akkor távolítsuk el a lock objektumot, ha nincs lockolva és nincs váró szál
-                // így csökkentjük annak esélyét, hogy eltávolítunk egy éppen használni készülő lockot
                 if (!lock.isLocked() && !lock.hasQueuedThreads()) {
                     locks.remove(cacheKey, lock);
                 }

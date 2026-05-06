@@ -92,7 +92,6 @@ public class JwtHandshakeInterceptor implements HandshakeInterceptor {
 			attributes.put("userId", userId);
 			attributes.put("username", usernameFromToken);
 
-			// ✅ KRITIKUS: Token elmentése az attributes-be
 			attributes.put("token", token);
 
 			return true;

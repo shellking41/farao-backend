@@ -12,7 +12,6 @@ import java.util.Optional;
 @Repository
 public interface RoomStatisticsRepository extends JpaRepository<RoomStatistics, Long> {
 
-	// Javított metódusok - underscore használatával
 	Optional<RoomStatistics> findByUser_IdAndRoom_RoomId(Long userId, Long roomId);
 
 	List<RoomStatistics> findByRoom_RoomIdOrderByWinRateInRoomDesc(Long roomId);

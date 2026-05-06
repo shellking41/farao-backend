@@ -39,8 +39,7 @@ public class WebsocketService implements IWebsocketService {
         return "Hi " + hello + "!";
     }
 
-    /*egyátalán nem jo ez at kell irni*/
-    /*ha beakarunk kapcsolodni ugyan abba a roomba ami mar letre van hozva akkor is csinal egy ujat*/
+
 
 
 }

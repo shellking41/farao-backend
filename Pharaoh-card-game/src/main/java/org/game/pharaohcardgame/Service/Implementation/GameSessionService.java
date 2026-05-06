@@ -45,9 +45,7 @@ import java.util.stream.Collectors;
 @Slf4j
 
 
-//todo: kell egy olyan endpoint ami arra van hogy a playerek a kartyak positionjat valtoztassák
 
-//todo: megkell csinalni azt amikor belepunk loginnal és van gamesessiona a usernek akkor a gamesession jelenjen meg az odlalon.(frontend)
 public class GameSessionService implements IGameSessionService {
 
     private final AuthenticationService authenticationService;
@@ -68,7 +66,6 @@ public class GameSessionService implements IGameSessionService {
 
 
     @Override
-    //todo: még azt kell ebbe beleirni hogy ha a csak egy player van a szobvaba akkor ne lehessen elinditani a metcset
     public SuccessMessageResponse startGame(GameStartRequest gameStartRequest) {
         User gamemaster = authenticationService.getAuthenticatedUser();
 
@@ -251,7 +248,6 @@ public class GameSessionService implements IGameSessionService {
         }
 
 
-        //todo: itt elkell kuldeni a valid playst is
         GameSessionResponse response = responseMapper.toGameSessionResponse(gameSession,
                 gameSession.getPlayers(),
                 playerHand, playedCardResponses,
@@ -353,8 +349,6 @@ public class GameSessionService implements IGameSessionService {
     }
 
     @Override
-    //TODO:KELL IDE EGY TRYCATCH
-    //todo: lehet ide kell majd a transacitonal, de aza problema hogy a nextturn nem kerul bele a transactionba ezért nem a legfrissebb gamestatet hasznalja.Kivettem innen a transactionalt, igy megy
     public GameSessionResponse drawCard(DrawCardRequest drawCardRequest) {
 
         Player currentPlayer = playerRepository.findById(drawCardRequest.getPlayerId())

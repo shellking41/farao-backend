@@ -20,7 +20,6 @@ public class SessionRegistry {
 	// userId -> set(sessionId)
 	private final Map<Long, Set<String>> userToSessions = new ConcurrentHashMap<>();
 
-	// ✅ ÚJ: sessionId -> token (token tracking)
 	private final Map<String, String> sessionToToken = new ConcurrentHashMap<>();
 
 	public void registerSession(Long userId, String sessionId) {
@@ -33,7 +32,6 @@ public class SessionRegistry {
 		log.debug("Registered session {} for user {}", sessionId, userId);
 	}
 
-	// ✅ ÚJ: Token regisztrálása
 	public void registerToken(String sessionId, String token) {
 		sessionToToken.put(sessionId, token);
 		log.debug("Registered token for session {}", sessionId);
@@ -42,7 +40,6 @@ public class SessionRegistry {
 	public int unregisterSession(String sessionId) {
 		Long userId = sessionToUser.remove(sessionId);
 
-		// ✅ Token törlése
 		sessionToToken.remove(sessionId);
 
 		if (userId == null) return 0;
@@ -62,27 +59,22 @@ public class SessionRegistry {
 		return userToSessions.getOrDefault(userId, Collections.emptySet()).size();
 	}
 
-	// ✅ ÚJ: User session ID-k lekérése
 	public Set<String> getSessionIds(Long userId) {
 		return new HashSet<>(userToSessions.getOrDefault(userId, Collections.emptySet()));
 	}
 
-	// ✅ ÚJ: Token lekérése session alapján
 	public String getToken(String sessionId) {
 		return sessionToToken.get(sessionId);
 	}
 
-	// ✅ ÚJ: User ID lekérése session alapján
 	public Long getUserId(String sessionId) {
 		return sessionToUser.get(sessionId);
 	}
 
-	// ✅ ÚJ: Összes session token Map
 	public Map<String, String> getAllSessionTokens() {
 		return new HashMap<>(sessionToToken);
 	}
 
-	// ✅ ÚJ: Session-ök keresése token alapján
 	public List<String> findSessionsByToken(String token) {
 		List<String> sessions = new ArrayList<>();
 		sessionToToken.forEach((sessionId, t) -> {

@@ -82,7 +82,6 @@ public class AuthenticationService implements IAuthenticationService {
             }
 
             var accessToken = jwtService.generateToken(user.getId(), user.getName());
-            //todo:Ezzel kell kezdeni valamit mert ezt ki kell kommentelni ha azt akarom hogy a masiktaba a usernek ne megyen elvéve a tokenja
             revokeAllUserTokensExcept(user, refreshToken);
 
             Tokens tokens = Tokens.builder()
@@ -125,7 +124,6 @@ public class AuthenticationService implements IAuthenticationService {
         }
     }
 
-    //todo: olyat kéne csinalni hogy leellenorizni hogy az adott user kapcsolodott e a websockethez, ha igen akkor a login failed
     @Override
     public ResponseEntity<LoginResponse> login(LoginRequest request, HttpServletResponse response) {
         try {

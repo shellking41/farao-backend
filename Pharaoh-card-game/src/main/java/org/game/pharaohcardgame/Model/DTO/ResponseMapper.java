@@ -358,7 +358,6 @@ public class ResponseMapper {
                 ));
         List<CardInHandResponse> cardInHandResponses = drawnCards != null ? toCardInHandResponseList(drawnCards) : null;
 
-        // ✨ RESHUFFLE FLAG LEKÉRÉSE
         Boolean reshuffled = (Boolean) gameState.getGameData().getOrDefault("reshuffled", false);
 
         return DrawCardResponse.builder()

@@ -840,7 +840,6 @@ public class BotLogic implements IBotLogic {
                 );
 
                 if (testNext.nextPlayer().getPlayerId().equals(botPlayer.getPlayerId())) {
-                    // ✨ Pontosan annyit rakjunk le amennyi kell (nem többet!)
                     List<Card> optimalAcePlay = longestAcePlay.get()
                             .subList(0, acesNeededForSelfTurn);
 

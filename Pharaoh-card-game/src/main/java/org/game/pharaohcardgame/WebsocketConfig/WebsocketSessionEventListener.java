@@ -87,7 +87,6 @@ public class WebsocketSessionEventListener {
 					}
 					User user = maybeUser.get();
 
-					// ✅ KRITIKUS: ELŐSZÖR a game session-t kezeljük
 					try {
 						Player player = playerRepository.findPlayerByUserInActiveCurrentRoom(userId);
 						if (player != null && player.getGameSession() != null) {
@@ -117,7 +116,6 @@ public class WebsocketSessionEventListener {
 
 					log.info("Completed scheduled disconnect handling for user {}", userId);
 
-					// ✅ ROOM leave csak akkor, ha NEM volt gamemaster
 					if (user.getCurrentRoom() != null) {
 						try {
 							LeaveRequest lr = LeaveRequest.builder()

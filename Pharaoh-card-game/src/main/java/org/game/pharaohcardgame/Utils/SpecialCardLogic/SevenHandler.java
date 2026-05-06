@@ -59,13 +59,10 @@ public class SevenHandler implements SpecialCardHandler{
 
         int increment = DRAW_PER_SEVEN * playedVIICards.size();
 
-        // Az új érték: ami már a következőhöz volt, plusz amit a current-nek kellett, plusz az új hetesek hatása
         int updated = existingForNext + existingForCurrent + increment;
 
-        // Töröljük a currentPlayer bejegyzését (átadtuk/elfogyott)
         drawStack.remove(currentPlayerId);
 
-        // Frissítjük a nextPlayer-hez tartozó stacket
         drawStack.put(nextPlayerId, updated);
 
 

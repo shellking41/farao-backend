@@ -46,7 +46,6 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
             "(SELECT COUNT(b) FROM Bot b WHERE b.room.roomId = :roomId)")
     Optional<Long> countPlayersTotal(@Param("roomId") Long roomId);
 
-    // 1) pageable ids lekérdezés (ez a lapozás alapja)
     @Query("SELECT r.roomId FROM Room r WHERE r.active = true")
     Page<Long> findActiveRoomIds(Pageable pageable);
 

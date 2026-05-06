@@ -30,7 +30,6 @@ public class UserAuthenticationToken extends AbstractAuthenticationToken {
 
     //azért kell mert ezzel megszerezzuk a  UserAuthenticationToken objectet amit majd a providerbe beleteszunk
     public static UserAuthenticationToken unauthenticated(UserPrincipal principal, String password) {
-        // Konstruktor: (RoomPrincipal, String)
         return new UserAuthenticationToken(principal, password);
     }
 

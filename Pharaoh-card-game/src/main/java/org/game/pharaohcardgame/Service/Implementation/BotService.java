@@ -86,7 +86,6 @@ public class BotService implements IBotService {
 
 			String botName = bot.getName();
 
-			// 💡 Kapcsolat bontás
 			Player player = bot.getBotPlayer();
 			if (player != null) {
 				player.setBot(null);
@@ -103,11 +102,9 @@ public class BotService implements IBotService {
 				}
 			}
 
-			// 💡 Szoba kapcsolat bontás
 			room.getBots().remove(bot);
 			roomRepository.save(room);
 
-			// 💡 Bot törlés
 			botRepository.delete(bot);
 
 			simpMessagingTemplate.convertAndSend(
@@ -124,7 +121,6 @@ public class BotService implements IBotService {
 
 
 	@Override
-	//todo: amikor modositjuk az egyik botot akkor a sorrendjuk megvaltozik
 	public SuccessMessageResponse editBot(BotEditRequest botEditRequest) {
 		User gamemaster=authenticationService.getAuthenticatedUser();
 

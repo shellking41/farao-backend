@@ -298,7 +298,6 @@ public class RoomService implements IRoomService {
                 }
             }
 
-            // ✅ ELLENŐRZÉS: Van-e még hely a szobában?
             if (isRoomFull(room)) {
                 response = responseMapper.createSuccessResponse(
                         false,
@@ -330,7 +329,6 @@ public class RoomService implements IRoomService {
                 return resultMessage;
             }
 
-            // ✅ SIKERES CSATLAKOZÁS
             room.getParticipants().add(user);
             roomRepository.save(room);
             user.setCurrentRoom(room);
