@@ -4,6 +4,7 @@ import org.game.pharaohcardgame.Authentication.JwtAuthFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -34,6 +35,8 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
+		                .requestMatchers(HttpMethod.OPTIONS).permitAll()
+
                         // Nyilvános endpointok
                         .requestMatchers("/auth/generate/temp-user-token", "/room/join-room-request","/auth/register", "/auth/login","/user/current-status","/auth/**")
                         .permitAll()
